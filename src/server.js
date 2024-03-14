@@ -105,7 +105,7 @@ app.get("/zalo",async (req,res) => {
 })
 
 app.get("/zalo/callback", async (req,res) => {
-    res.send("authen callback")
+    res.send(req.query)
 })
 
 app.get("/zalo_verifierQUUuA8pZRnu7biW5qkTj4IR7sGxAiGfGCZOo.html",async (req,res) => {
