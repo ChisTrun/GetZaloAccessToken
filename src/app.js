@@ -19,6 +19,8 @@ const { URLSearchParams } = require('url');
   app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser("trung"))
+
+
 app.get("/",async (req,res) => {
     res.render('mainviews/index')
 })
@@ -31,6 +33,9 @@ const response_type = 'code'
 const scopes = ['https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email']
 const redirect_uri ='http://localhost:3000/auth/cb'
 const axios = require('axios');
+
+
+
 app.get("/auth",async (req,res) => {
     const queries = new URLSearchParams({
         response_type,
@@ -78,13 +83,6 @@ app.get("/auth/cb",async (req,res) => {
 
 
 
-const fs = require('fs');
-
-server = https.createServer({
-        key: fs.readFileSync(path.join(__dirname, 'ssl', 'key.key')),
-        cert: fs.readFileSync(path.join(__dirname, 'ssl', 'cert.cert'))
-    }, app)
-
-server.listen(port,() => {
+app.listen(port,() => {
     console.log("Server is runing on port: " + port)
 })
