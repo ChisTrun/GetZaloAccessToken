@@ -101,11 +101,14 @@ const app_id = process.env.APP_ID
 const redirect_uri = "https://getzaloaccesstoken.onrender.com/zalo/callback"
 const state ="vochitrung"
 
+
 app.get("/zalo",async (req,res) => {
     res.redirect(`https://oauth.zaloapp.com/v4/permission?app_id=${app_id}&redirect_uri=${redirect_uri}&state=${state}`)
 })
 
 app.get("/zalo/callback", async (req,res) => {
+    // Lấy code từ callback query
+    // Sau đó dùng code đó để lấy access_token 
     rs = await fetch("https://oauth.zaloapp.com/v4/access_token",{
         method: "post",
         headers: {
@@ -119,7 +122,20 @@ app.get("/zalo/callback", async (req,res) => {
           }),
     })
     const data = await rs.json()
-    res.send(data)
+    const userJson = await fetch("https://graph.zalo.me/v2.0/me?fields=id,name,picture",{
+        method: "get",
+        headers: {
+            "access_token" : data.access_token
+        }
+    })
+    const userData = await userJson.json()
+    let outputData = {
+        code: res.query.code,
+        access_token: data.access_token,
+        user_data: userData
+        
+    }
+    res.send(outputData)
 })
 
 app.get("/zalo_verifierQUUuA8pZRnu7biW5qkTj4IR7sGxAiGfGCZOo.html",async (req,res) => {
