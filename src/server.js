@@ -94,8 +94,8 @@ async function createCodeChallenge(codeVerifier) {
     return base64url;
 }
 
-
-const code_verifier = "w2S8X9X5ulFf8PpN7C5bM333oblIo39mnKdnxmI3xPw"
+const secret_key = "9T7UX1X6IMS62VQ8zLZn"
+// const code_verifier = "w2S8X9X5ulFf8PpN7C5bM333oblIo39mnKdnxmI3xPw" optional
 const app_id = "2246837301446122386"
 const redirect_uri = "https://getzaloaccesstoken.onrender.com/zalo/callback"
 const state ="vochitrung"
@@ -105,7 +105,20 @@ app.get("/zalo",async (req,res) => {
 })
 
 app.get("/zalo/callback", async (req,res) => {
-    res.send(req.query)
+    rs = await fetch("https://oauth.zaloapp.com/v4/access_token",{
+        method: "post",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "secret_key": secret_key
+        },
+        body: new URLSearchParams({
+            code: req.query.code,
+            app_id: app_id,
+            grant_type: 'authorization_code',
+          }),
+    })
+    const data = await rs.json()
+    res.send(data)
 })
 
 app.get("/zalo_verifierQUUuA8pZRnu7biW5qkTj4IR7sGxAiGfGCZOo.html",async (req,res) => {
