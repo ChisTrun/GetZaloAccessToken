@@ -5,6 +5,7 @@ const path = require('path')
 const jwt = require('jsonwebtoken');
 const port = 3001
 const https = require('https')
+require("dotenv").config()
 
 
 
@@ -94,9 +95,9 @@ async function createCodeChallenge(codeVerifier) {
     return base64url;
 }
 
-const secret_key = "9T7UX1X6IMS62VQ8zLZn"
+const secret_key = process.env.SECRET_KEY
 // const code_verifier = "w2S8X9X5ulFf8PpN7C5bM333oblIo39mnKdnxmI3xPw" optional
-const app_id = "2246837301446122386"
+const app_id = process.env.APP_ID
 const redirect_uri = "https://getzaloaccesstoken.onrender.com/zalo/callback"
 const state ="vochitrung"
 
