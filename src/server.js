@@ -129,13 +129,8 @@ app.get("/zalo/callback", async (req,res) => {
     //     }
     // })
     // const userData = await userJson.json()
-    let outputData = {
-        code: res.query.code,
-        access_token: data.access_token,
-        // user_data: userData
-        
-    }
-    res.send(outputData)
+   
+    res.send(data)
 })
 
 app.get("/zalo_verifierQUUuA8pZRnu7biW5qkTj4IR7sGxAiGfGCZOo.html",async (req,res) => {
