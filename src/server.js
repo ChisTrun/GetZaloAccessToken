@@ -81,7 +81,9 @@ app.get("/auth/cb",async (req,res) => {
     res.send("end")
 })
 
-
+app.get("/zalo_verifierQUUuA8pZRnu7biW5qkTj4IR7sGxAiGfGCZOo.html",async (req,res) => {
+    res.sendFile(path.join(__dirname,"zalo/zalo_verifierQUUuA8pZRnu7biW5qkTj4IR7sGxAiGfGCZOo.html"))
+})
 
 app.listen(port,() => {
     console.log("Server is runing on port: " + port)
