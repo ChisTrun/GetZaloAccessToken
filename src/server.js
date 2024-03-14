@@ -122,17 +122,17 @@ app.get("/zalo/callback", async (req,res) => {
           }),
     })
     const data = await rs.json()
-    const userJson = await fetch("https://graph.zalo.me/v2.0/me?fields=id,name,picture",{
-        method: "get",
-        headers: {
-            "access_token" : data.access_token
-        }
-    })
-    const userData = await userJson.json()
+    // const userJson = await fetch("https://graph.zalo.me/v2.0/me?fields=id,name,picture",{
+    //     method: "get",
+    //     headers: {
+    //         "access_token" : data.access_token
+    //     }
+    // })
+    // const userData = await userJson.json()
     let outputData = {
         code: res.query.code,
         access_token: data.access_token,
-        user_data: userData
+        // user_data: userData
         
     }
     res.send(outputData)
