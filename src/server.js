@@ -130,12 +130,36 @@ app.get("/zalo/callback", async (req,res) => {
     })
     const userData = await userJson.json()
    
-    res.send(userData)
+    res.send(data)
 })
 
 app.get("/zalo_verifierQUUuA8pZRnu7biW5qkTj4IR7sGxAiGfGCZOo.html",async (req,res) => {
     res.sendFile(path.join(__dirname,"zalo/zalo_verifierQUUuA8pZRnu7biW5qkTj4IR7sGxAiGfGCZOo.html"))
 })
+
+const fetch = require('node-fetch');
+const {HttpsProxyAgent} = require('https-proxy-agent');
+
+const proxy = 'http://171.247.204.98:8080/'; // Replace with your VPN proxy URL
+const agent = new HttpsProxyAgent(proxy)
+
+
+
+const GetDataViaProxy = async (url,agent) => {
+    let response = await fetch(url, { agent });
+    console.log(response)
+    let data = await response.json();
+    console.log(data);
+}
+
+
+app.get("/test/proxy",async (req,res) => {
+    // const nomalData = await fetch("https://jsonplaceholder.typicode.com/todos/1")
+    // const user = await nomalData.json()
+    // const data = await GetDataViaProxy("https://jsonplaceholder.typicode.com/todos/1",agent)
+    res.send(user)
+})
+
 
 app.listen(port,() => {
     console.log("Server is runing on port: " + port)
